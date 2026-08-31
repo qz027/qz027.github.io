@@ -1,13 +1,274 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Qianyi Zhang</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Qianyi Zhang</title>
+<style>
+  :root {
+    --ink: #1c2320;
+    --paper: #f7f6f2;
+    --line: #d9d6cc;
+    --accent: #3c6e5e;
+    --muted: #6b6f68;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  header.site {
+    position: sticky;
+    top: 0;
+    background: rgba(247, 246, 242, 0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+  }
+
+  .site-name {
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  nav.site ul {
+    list-style: none;
+    display: flex;
+    gap: 22px;
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.92rem;
+  }
+
+  nav.site a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+  }
+  nav.site a:hover {
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .hero {
+    padding: 72px 0 56px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.1rem, 5vw, 2.8rem);
+    line-height: 1.15;
+    margin: 0 0 14px;
+    font-weight: 600;
+  }
+
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 34ch;
+    margin: 0;
+  }
+
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 78px;
+  }
+
+  section:last-of-type {
+    border-bottom: none;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 20px;
+  }
+
+  section p {
+    margin: 0 0 16px;
+    max-width: 62ch;
+  }
+
+  section p:last-child { margin-bottom: 0; }
+
+  .work-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .work-list li {
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .work-list li:first-child { border-top: none; padding-top: 0; }
+
+  .work-list .item-title {
+    font-weight: 600;
+  }
+
+  .work-list .item-meta {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.88rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 1.05rem;
+  }
+
+  footer {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 24px 56px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 520px) {
+    .header-inner { padding: 16px 20px; }
+    nav.site ul { gap: 16px; }
+    .hero { padding: 48px 0 40px; }
+    section { padding: 40px 0; }
+  }
+</style>
 </head>
 <body>
-  <h1>Architectural Designer + Researcher</h1>
-  <p>Welcome to my website.</p>
-  <h2>Design</h2>
-  <h3>Research</h3>
-  <h4>Other</h4>
+
+<header class="site">
+  <div class="header-inner">
+    <span class="site-name">Qianyi Zhang</span>
+    <nav class="site" aria-label="Primary">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#design">Design</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="hero">
+    <h1>Qianyi Zhang</h1>
+    <p>Designer and researcher working at the edge of interaction and inquiry.</p>
+  </div>
+
+  <section id="about">
+    <h2>About</h2>
+    <p>
+      I'm Qianyi Zhang — replace this with a couple of sentences about who you are,
+      what you work on, and what ties your design and research work together.
+      Keep it short; this is the paragraph most visitors will actually read.
+    </p>
+    <p>
+      A second short paragraph works well here for background, current focus,
+      or where you're based.
+    </p>
+  </section>
+
+  <section id="design">
+    <h2>Design</h2>
+    <ul class="work-list">
+      <li>
+        <span class="item-title">Project name</span>
+        <span class="item-meta">2026</span>
+      </li>
+      <li>
+        <span class="item-title">Project name</span>
+        <span class="item-meta">2025</span>
+      </li>
+      <li>
+        <span class="item-title">Project name</span>
+        <span class="item-meta">2025</span>
+      </li>
+    </ul>
+    <p>Swap in your actual projects, with links to case studies where you have them.</p>
+  </section>
+
+  <section id="research">
+    <h2>Research</h2>
+    <ul class="work-list">
+      <li>
+        <span class="item-title">Paper or project title</span>
+        <span class="item-meta">Venue, 2026</span>
+      </li>
+      <li>
+        <span class="item-title">Paper or project title</span>
+        <span class="item-meta">Venue, 2025</span>
+      </li>
+    </ul>
+    <p>List publications, ongoing research, or talks. Link out to PDFs or DOIs when available.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <div class="contact-links">
+      <a href="mailto:hello@example.com">hello@example.com</a>
+      <a href="https://linkedin.com/in/qianyizhang" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/qianyizhang" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Qianyi Zhang
+</footer>
+
 </body>
 </html>
