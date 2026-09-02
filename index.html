@@ -4,271 +4,368 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Qianyi Zhang</title>
+<link href="https://fonts.cdnfonts.com/css/glacial-indifference" rel="stylesheet">
 <style>
   :root {
-    --ink: #1c2320;
-    --paper: #f7f6f2;
-    --line: #d9d6cc;
-    --accent: #3c6e5e;
-    --muted: #6b6f68;
+    --blue: #6C7FE0;
+    --blue-light: #C7D2F5;
+    --orange: #F0A83E;
+    --ink: #333333;
+    --line: #cfcfcf;
+    --paper: #ffffff;
   }
 
   * { box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
 
   body {
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    font-family: 'Glacial Indifference', 'Century Gothic', Futura, -apple-system, sans-serif;
   }
 
-  a {
-    color: var(--accent);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 3px;
-  }
-  a:hover { text-decoration-thickness: 2px; }
-  a:focus-visible, button:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
+  a { color: inherit; }
 
-  header.site {
-    position: sticky;
-    top: 0;
-    background: rgba(247, 246, 242, 0.92);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--line);
-    z-index: 10;
-  }
-
-  .header-inner {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 18px 24px;
+  .page {
+    min-height: 100vh;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
     flex-wrap: wrap;
-    gap: 10px 24px;
+    align-items: stretch;
+    padding: 56px;
+    gap: 40px;
   }
 
-  .site-name {
-    font-size: 1.05rem;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-  }
+  /* ---------- Sidebar ---------- */
 
-  nav.site ul {
-    list-style: none;
+  .sidebar {
     display: flex;
-    gap: 22px;
-    margin: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 260px;
+  }
+
+  .name {
+    font-size: clamp(2.2rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--blue);
+    margin: 0 0 32px;
+    line-height: 1.1;
+  }
+
+  .tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .tab-link {
+    background: none;
+    border: none;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 0.92rem;
+    text-align: left;
+    font-family: inherit;
+    font-size: 1.7rem;
+    color: var(--blue-light);
+    cursor: pointer;
+    transition: color 0.15s ease;
   }
 
-  nav.site a {
-    color: var(--ink);
+  .tab-link:hover {
+    color: var(--blue);
+  }
+
+  .tab-link.active {
+    color: var(--orange);
+  }
+
+  .tab-link:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: 4px;
+  }
+
+  .contact h2 {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin: 0 0 16px;
+  }
+
+  .contact-buttons {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--blue);
+    color: #fff;
     text-decoration: none;
-    border-bottom: 1px solid transparent;
-    padding-bottom: 2px;
-  }
-  nav.site a:hover {
-    border-bottom-color: var(--accent);
-    color: var(--accent);
-  }
-
-  main {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 0 24px;
+    font-size: 1rem;
+    padding: 12px 20px;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: background 0.15s ease;
   }
 
-  .hero {
-    padding: 72px 0 56px;
-    border-bottom: 1px solid var(--line);
+  .btn:hover {
+    background: #5567cc;
   }
 
-  .hero h1 {
-    font-size: clamp(2.1rem, 5vw, 2.8rem);
-    line-height: 1.15;
-    margin: 0 0 14px;
-    font-weight: 600;
+  /* ---------- Main content ---------- */
+
+  .content {
+    flex: 1;
+    min-width: 280px;
+    display: flex;
+    align-items: flex-start;
   }
 
-  .hero p {
+  .panel {
+    display: none;
+    width: 100%;
+  }
+
+  .panel.active {
+    display: block;
+  }
+
+  /* About panel */
+  #about p {
+    max-width: 60ch;
     font-size: 1.15rem;
-    color: var(--muted);
-    max-width: 34ch;
-    margin: 0;
-  }
-
-  section {
-    padding: 56px 0;
-    border-bottom: 1px solid var(--line);
-    scroll-margin-top: 78px;
-  }
-
-  section:last-of-type {
-    border-bottom: none;
-  }
-
-  section h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
+    line-height: 1.7;
     margin: 0 0 20px;
   }
 
-  section p {
-    margin: 0 0 16px;
-    max-width: 62ch;
-  }
-
-  section p:last-child { margin-bottom: 0; }
-
-  .work-list {
+  /* Research panel */
+  #research ul {
     list-style: none;
     margin: 0;
     padding: 0;
+    max-width: 60ch;
   }
 
-  .work-list li {
+  #research li {
     padding: 18px 0;
     border-top: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
     gap: 16px;
+    font-size: 1.1rem;
     flex-wrap: wrap;
   }
 
-  .work-list li:first-child { border-top: none; padding-top: 0; }
+  #research li:first-child { border-top: none; }
 
-  .work-list .item-title {
-    font-weight: 600;
-  }
-
-  .work-list .item-meta {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 0.88rem;
-    color: var(--muted);
+  #research .meta {
+    color: var(--blue-light);
+    font-size: 0.95rem;
     white-space: nowrap;
   }
 
-  .contact-links {
+  /* Projects panel: slideshow */
+  .slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 785px;
+    aspect-ratio: 16 / 10;
+    border: 1px solid var(--line);
+  }
+
+  .slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 24px;
+  }
+
+  .slide.active { display: flex; }
+
+  .slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  .slide .placeholder-label {
+    color: #999;
+    font-size: 1.1rem;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--blue);
+    cursor: pointer;
+    padding: 8px 14px;
+    line-height: 1;
+  }
+
+  .arrow:hover { color: var(--orange); }
+  .arrow.prev { left: 4px; }
+  .arrow.next { right: 4px; }
+
+  .dots {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     gap: 8px;
-    font-size: 1.05rem;
+    margin-top: 16px;
   }
 
-  footer {
-    max-width: 640px;
-    margin: 0 auto;
-    padding: 32px 24px 56px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    font-size: 0.85rem;
-    color: var(--muted);
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--blue-light);
+    border: none;
+    cursor: pointer;
+    padding: 0;
   }
 
-  @media (max-width: 520px) {
-    .header-inner { padding: 16px 20px; }
-    nav.site ul { gap: 16px; }
-    .hero { padding: 48px 0 40px; }
-    section { padding: 40px 0; }
+  .dot.active { background: var(--blue); }
+
+  @media (max-width: 720px) {
+    .page {
+      padding: 32px 24px;
+      flex-direction: column;
+    }
+    .sidebar {
+      min-height: auto;
+    }
+    .contact {
+      margin-top: 40px;
+    }
   }
 </style>
 </head>
 <body>
 
-<header class="site">
-  <div class="header-inner">
-    <span class="site-name">Qianyi Zhang</span>
-    <nav class="site" aria-label="Primary">
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#design">Design</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<div class="page">
 
-<main>
-
-  <div class="hero">
-    <h1>Qianyi Zhang</h1>
-    <p>Designer and researcher working at the edge of interaction and inquiry.</p>
-  </div>
-
-  <section id="about">
-    <h2>About</h2>
-    <p>
-      I'm Qianyi Zhang — replace this with a couple of sentences about who you are,
-      what you work on, and what ties your design and research work together.
-      Keep it short; this is the paragraph most visitors will actually read.
-    </p>
-    <p>
-      A second short paragraph works well here for background, current focus,
-      or where you're based.
-    </p>
-  </section>
-
-  <section id="design">
-    <h2>Design</h2>
-    <ul class="work-list">
-      <li>
-        <span class="item-title">Project name</span>
-        <span class="item-meta">2026</span>
-      </li>
-      <li>
-        <span class="item-title">Project name</span>
-        <span class="item-meta">2025</span>
-      </li>
-      <li>
-        <span class="item-title">Project name</span>
-        <span class="item-meta">2025</span>
-      </li>
-    </ul>
-    <p>Swap in your actual projects, with links to case studies where you have them.</p>
-  </section>
-
-  <section id="research">
-    <h2>Research</h2>
-    <ul class="work-list">
-      <li>
-        <span class="item-title">Paper or project title</span>
-        <span class="item-meta">Venue, 2026</span>
-      </li>
-      <li>
-        <span class="item-title">Paper or project title</span>
-        <span class="item-meta">Venue, 2025</span>
-      </li>
-    </ul>
-    <p>List publications, ongoing research, or talks. Link out to PDFs or DOIs when available.</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <div class="contact-links">
-      <a href="mailto:hello@example.com">hello@example.com</a>
-      <a href="https://linkedin.com/in/qianyizhang" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="https://github.com/qianyizhang" target="_blank" rel="noopener">GitHub</a>
+  <aside class="sidebar">
+    <div>
+      <h1 class="name">Qianyi Zhang</h1>
+      <nav class="tabs">
+        <button class="tab-link" data-tab="about">About</button>
+        <button class="tab-link active" data-tab="projects">Projects</button>
+        <button class="tab-link" data-tab="research">Research</button>
+      </nav>
     </div>
-  </section>
 
-</main>
+    <div class="contact">
+      <h2>Contact</h2>
+      <div class="contact-buttons">
+        <a class="btn" href="mailto:hello@example.com">Email</a>
+        <a class="btn" href="https://linkedin.com/in/qianyizhang" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </aside>
 
-<footer>
-  © 2026 Qianyi Zhang
-</footer>
+  <main class="content">
+
+    <section id="about" class="panel">
+      <p>
+        I'm Qianyi Zhang — replace this with a couple of sentences about who you are,
+        what you work on, and what ties your design and research together.
+      </p>
+      <p>
+        A second short paragraph works well here for background, current focus,
+        or where you're based.
+      </p>
+    </section>
+
+    <section id="projects" class="panel active">
+      <div class="slideshow">
+        <div class="slides">
+          <div class="slide active">
+            <span class="placeholder-label">Image Slide 1 — replace with &lt;img src="..."&gt;</span>
+          </div>
+          <div class="slide">
+            <span class="placeholder-label">Image Slide 2</span>
+          </div>
+          <div class="slide">
+            <span class="placeholder-label">Image Slide 3</span>
+          </div>
+        </div>
+        <button class="arrow prev" aria-label="Previous slide">&#8249;</button>
+        <button class="arrow next" aria-label="Next slide">&#8250;</button>
+      </div>
+      <div class="dots"></div>
+    </section>
+
+    <section id="research" class="panel">
+      <ul>
+        <li>
+          <span>Paper or project title</span>
+          <span class="meta">Venue, 2026</span>
+        </li>
+        <li>
+          <span>Paper or project title</span>
+          <span class="meta">Venue, 2025</span>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+  // Tab switching
+  const tabLinks = document.querySelectorAll('.tab-link');
+  const panels = document.querySelectorAll('.panel');
+
+  tabLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      tabLinks.forEach(l => l.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      link.classList.add('active');
+      document.getElementById(link.dataset.tab).classList.add('active');
+    });
+  });
+
+  // Slideshow
+  const slides = document.querySelectorAll('.slide');
+  const dotsWrap = document.querySelector('.dots');
+  let current = 0;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    dot.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('.dot');
+
+  function goTo(index) {
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = (index + slides.length) % slides.length;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+  }
+
+  document.querySelector('.arrow.prev').addEventListener('click', () => goTo(current - 1));
+  document.querySelector('.arrow.next').addEventListener('click', () => goTo(current + 1));
+</script>
 
 </body>
 </html>
